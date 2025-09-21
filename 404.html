@@ -1,1 +1,106 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>-</title><link rel="icon" href="/favicon.ico"><link rel="manifest" href="/manifest.json"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><style>html,body{margin:0;padding:0;height:100%;width:100%;overflow:hidden}video{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover}</style></head><body><video id="v" autoplay muted loop playsinline></video><script>let a=["AQM30GQcBIneeWRz_f6FzjyMpNcVPdpOxyGxB1hwmocBKoZS7DWz6Dnb0zmGXVk1tXjAm5I0ineS-9CKDihwAhE23md94rUZ3PwX4WM.mp4","AQMcTXb_eKRO-8ppuLJ67Kz90Tt5tMZFt76BB1-jGYr-85BapL5T8x_FbsnPOeMQBzplC8y9QSMLpMB3VWD1MfHB-al6dMc0Yn3kTjw.mp4","AQMdBQV9guQ6g_niDthpyuNJOHwHWsQY2ZwwA4dHO5jCkrOMwUx5SGzANDINrhk9VUnXwvs7w0-V4Iuxt5Cq5yxamFj0JtR1ImHmUXo.mp4","AQN1TJgddwW24U6_rOpbvCk1t5yJmUMwo53610PRKNI4J5HeWYg3MD0oirZqIGQb8eD_NVsutxV7-pkZ2JooDkKPYr-iz3meU7yElDE.mp4","AQNkyS4ZCzjtxcsB5LY04r9zsZCdGAdaJMSXyk9FaI9r4DwFIrf2Pu7PHuJ7nbdXQmR_lM6nsz01Tffb8Amomyf8HFUfp_g2Zqm4GYE.mp4"],v=document.getElementById("v"),c="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";function r(){v.src=a[Math.floor(Math.random()*a.length)];v.play()}function s(){let t="";for(let e=0;e<40;e++)t+=c.charAt(Math.floor(Math.random()*c.length));return t}r();v.onclick=r;setInterval(()=>{history.replaceState(null,"",s())},50);</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>-</title>
+    <link rel="icon" href="/favicon.ico">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1rem;
+            font-family: sans-serif;
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        #overlay.hidden {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <video id="v" autoplay playsinline muted></video>
+    <div id="overlay">unmute</div>
+    <script>
+        let a = [
+            "AQM30GQcBIneeWRz_f6FzjyMpNcVPdpOxyGxB1hwmocBKoZS7DWz6Dnb0zmGXVk1tXjAm5I0ineS-9CKDihwAhE23md94rUZ3PwX4WM.mp4",
+            "AQMcTXb_eKRO-8ppuLJ67Kz90Tt5tMZFt76BB1-jGYr-85BapL5T8x_FbsnPOeMQBzplC8y9QSMLpMB3VWD1MfHB-al6dMc0Yn3kTjw.mp4",
+            "AQMdBQV9guQ6g_niDthpyuNJOHwHWsQY2ZwwA4dHO5jCkrOMwUx5SGzANDINrhk9VUnXwvs7w0-V4Iuxt5Cq5yxamFj0JtR1ImHmUXo.mp4",
+            "AQN1TJgddwW24U6_rOpbvCk1t5yJmUMwo53610PRKNI4J5HeWYg3MD0oirZqIGQb8eD_NVsutxV7-pkZ2JooDkKPYr-iz3meU7yElDE.mp4",
+            "AQNkyS4ZCzjtxcsB5LY04r9zsZCdGAdaJMSXyk9FaI9r4DwFIrf2Pu7PHuJ7nbdXQmR_lM6nsz01Tffb8Amomyf8HFUfp_g2Zqm4GYE.mp4",
+            "AQOGnq4J9KetkoX5vK243rwI0Uzeqm-iqF5CmdaaByxcHhq-YIRlMNE4j3RFDbqsxTchq0_S_2mSf3h-Sc3EJL-Gj7Ygjz426vErBwE.mp4",
+            "AQOnFStZctVMYeUyXAZu_gIYtYt_xMpYXOia-6EISv_ObjJQnWYwHcPD-kbyy_CYtmFviNcLzKMltiCJmeVaV8IicBgDq-OEoS7pTLw.mp4",
+            "AQOteTNFbSF-H-HEznJ4aLEOnHrRI80lT_ecxcac30hcxTG3HV9GDra95kCsq4sMsmlsNlmKPxsC7eC1V1rb_GXI5WFuE-K1r7wYZZ4.mp4"
+        ];
+        let v = document.getElementById("v");
+        let overlay = document.getElementById("overlay");
+        let c = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+        let last = -1;
+
+        function r() {
+            let n;
+            do {
+                n = Math.floor(Math.random() * a.length);
+            } while (n === last && a.length > 1);
+            last = n;
+            v.src = a[n];
+            v.play();
+        }
+
+        function s() {
+            let t = "";
+            for (let e = 0; e < 100; e++) {
+                t += c.charAt(Math.floor(Math.random() * c.length));
+            }
+            return t;
+        }
+
+        v.addEventListener("ended", r);
+        r();
+
+        v.addEventListener("click", () => {
+            if (v.muted) {
+                v.muted = false;
+                overlay.classList.add("hidden");
+            }
+            r();
+        });
+
+        setInterval(() => {
+            history.replaceState(null, "", s());
+        }, 100);
+    </script>
+</body>
+
+</html>
